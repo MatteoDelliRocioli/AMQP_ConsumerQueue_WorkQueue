@@ -38,7 +38,7 @@ namespace AMQP_ConsumerQueue_WorkQueue
                         channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                     };
 
-                    channel.BasicConsume(queue: "myQueue",                  //consumes the queue
+                    channel.BasicConsume(queue: "myQueue",                  //consumes the queue 
                                             autoAck: false,
                                             consumer: consumer);
 
