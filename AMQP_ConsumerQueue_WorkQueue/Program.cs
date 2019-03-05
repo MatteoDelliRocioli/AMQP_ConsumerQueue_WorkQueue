@@ -24,7 +24,7 @@ namespace AMQP_ConsumerQueue_WorkQueue
                                             autoDelete: false,
                                             arguments: null);
 
-                    var consumer = new EventingBasicConsumer(channel); //declaring consumer
+                    var consumer = new EventingBasicConsumer(channel);      //declaring consumer
                     consumer.Received += (model, ea) =>                     //assignment of the body of the response to the consumer when the received event happens
                     {                                                       
                         var body = ea.Body;                                 //gets the body of the message
