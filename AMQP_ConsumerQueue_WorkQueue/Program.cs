@@ -26,20 +26,22 @@ namespace AMQP_ConsumerQueue_WorkQueue
 
                     var consumer = new EventingBasicConsumer(channel);      //declaring consumer
                     consumer.Received += (model, ea) =>                     //assignment of the body of the response to the consumer when the received event happens
-                    {                                                       
+                    {
                         var body = ea.Body;                                 //gets the body of the message
                         var message = Encoding.UTF8.GetString(body);        //parses it to string to display it
-                        Console.WriteLine(" [x] received {0}", message);    
+                        Console.WriteLine(" [x] received {0}", message);
 
                         int dots = message.Split(".").Length - 1;           //simulates the latency for different processes
                         Thread.Sleep(dots * 1000);
 
                         Console.WriteLine("[x] Done");
+                        channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                     };
 
                     channel.BasicConsume(queue: "myQueue",                  //consumes the queue
-                                            autoAck: true,
+                                            autoAck: false,
                                             consumer: consumer);
+
                     Console.WriteLine("press [enter] to exit");
                     Console.ReadLine();
                 }
